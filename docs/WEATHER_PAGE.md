@@ -21,6 +21,8 @@ Add an server endpoint `/api/forecast` that calls the SMHI API
 
 SMHI endpoint to use: [SMHI forecast](https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/{lon}/lat/{lat}/data.json)
 
+Documentation: [SMHI API](https://opendata-download-metfcst.smhi.se/metfcst/pmp/introduction)
+
 The response data structure is:
 
 ```typescript
@@ -49,11 +51,21 @@ Only keep these `parameters.name` values:
 - "t" Air temperature
 - "ws" Wind speed
 - "wd" Wind direction
-- "pcat" Precipitation category
+- "pcat" Precipitation category, can be 0=no precipitation (clear), 1=snow, 2=snow and rain, 3=rain, 4=drizzle, 5=freezing rain, 6=freezing drizzle
 - "pmean" Mean precipitation intensity
+
+Format the `validTime` to string `MMM d HH:mm`
+Convert wind direction degrees to compass direction: N, NE, E, SE, S, SW, W, NW
 
 ## Weather page
 
 Create a weather page component that displays the weather data. Show both 
 - a table by time as rows and weather parameters as columns.
 - a svg graph temperature by time.
+
+## Testing
+
+Create a mocking response from the SMHI API.
+Create a server endpoint test for`/api/forecast` nock the smhi api with the mock response.
+Create component unit tests for the weather page component.
+Create stories for each weather svg component and the weather page component.

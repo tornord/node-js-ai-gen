@@ -13,22 +13,29 @@ Your prefered tech stack is:
 - Prettier as code formatter
 - ESLint as code linter
 - Storybook for component library
+- Express as server framework, incl. `cors` and `helmet`, and supertest as testing library for server
 
 Follow these design details:
 
-- Set type to `module` in `package.json`
+- Set type to `module` in `package.json`. Never use `__dirname`
 - Add global styles in `src/main.tsx`, base project font should be defined in global styles
 - Vite and Vitest should use same config file `vite.config.ts`
-- Add styling by using Styled Components, do not use css prop in React components
+- Add styling by using Styled Components, do not use css prop in React components. Never use css files.
 - Add a VS Code launch configuration `Run current file` to `.vscode/launch.json`
-- Use `tsx` (as `node --import=tsx/esm`) to start own server side typescript files
+- Use `tsx`, version 4.16 or later (as `node --import=tsx/esm`) to start own server side typescript files
 - Set `target` to `esnext` in `tsconfig.json`
 - Add `README.md` file and add how to install and run the project
+- Add types for test `@types/jest`
 - When adding tests, put them in same folder as the file you are testing
 - Add a simple Home page as a start and add a test for it
-- Add typescript support for eslint
+- Add typescript support for eslint, skip `react/react-in-jsx-scope` and `@typescript-eslint/no-explicit-any`
+- Prefer double quotes for strings, as prettier default
 - Install storybook by running `npm init storybook`
 - When adding storybook stories, put them in same folder as the component
+- When creating react svg components, optimal viewBox format is `0 0 120 120`
+- When testing api server, use the lib `supertest`
+- When importing native node modules, always add prefix `node:`
+- Always import `@types/node`
 
 Follow and maintain this project structure:
 
@@ -43,7 +50,7 @@ Follow and maintain this project structure:
 - `public/` - Static assets
 - `vite.config.ts` - Vite and Vitest configuration
 - `tsconfig.json` - TypeScript configuration
-- `tsconfig.node.json` - TypeScript configuration for vite.config and `server/`
+- `tsconfig.node.json` - TypeScript configuration for `vite.config.ts` and `server/`
 - `package.json` - Project dependencies and scripts
 - `index.html` - HTML entry point, Add link to base project font
 - `.eslintrc.cjs` - ESLint configuration
