@@ -1,0 +1,59 @@
+# Weather forecast page
+
+## Overview
+
+The Weather Page is a React component that displays weather information for a specific location.
+
+## Weather svg icons
+
+Create weather react svg components for weather types:
+
+- Clear
+- Clouds
+- Drizzle
+- Rain
+- Snow
+
+## SMHI API
+
+Use SMHI API to get weather data. Use location Stokholm: 59.334591, 18.063240, set lat & lon as env variables.
+Add an server endpoint `/api/forecast` that calls the SMHI API 
+
+SMHI endpoint to use: [SMHI forecast](https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/{lon}/lat/{lat}/data.json)
+
+The response data structure is:
+
+```typescript
+interface SmhiForecastResponse {
+    approvedTime: string;
+    referenceTime: string;
+    geometry: {
+        type: string;
+        coordinates: number[][]; // Array of coordinates
+    };
+    timeSeries: Array<{
+        validTime: string;
+        parameters: Array<{
+            name: string;
+            levelType: string;
+            level: number;
+            unit: string;
+            values: number[]; // Array of values
+        }>;
+    }>;
+} 
+```
+
+Only keep these `parameters.name` values:
+
+- "t" Air temperature
+- "ws" Wind speed
+- "wd" Wind direction
+- "pcat" Precipitation category
+- "pmean" Mean precipitation intensity
+
+## Weather page
+
+Create a weather page component that displays the weather data. Show both 
+- a table by time as rows and weather parameters as columns.
+- a svg graph temperature by time.
